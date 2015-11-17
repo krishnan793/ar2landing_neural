@@ -39,64 +39,23 @@ def reset():
 	pub.publish(nothing)
 	return
 
-			
-def takeoff():
-	nothing = Empty()
-	print nothing
-	pub = rospy.Publisher('/ardrone/takeoff', Empty, queue_size=10)
-	time.sleep(1)
-	pub.publish(nothing)
-	return
-
-def land():
-	nothing = Empty()
-	print "Landing"
-	pub = rospy.Publisher('/ardrone/land', Empty, queue_size=10)
-	time.sleep(1)
-	pub.publish(nothing)
-	time.sleep(1)
-	return
-
 def reset_drone(pub1):
-	control = Twist()
-	control.linear.x=0
-	control.linear.y=0
-	control.linear.z=0
-	pub1.publish(control)
+	controller.SetCommand(0,0,0,0)
 	time.sleep(1)
+
 def search_pattern():
-	#control = Twist()
-	#(linear.y,linear.x,angular.z,linear.z)
 	controller.SetCommand(0,0,0,1.5)
-	#control.linear.x=0
-	#control.linear.y=0
-	#control.linear.z=1.5
-	#pub1.publish(control)
 	sleep(5)
 	controller.SetCommand(0,0,0,0)
 	sleep(1)
-	#control.linear.z=0
-	#pub1.publish(control)
 	while not rospy.is_shutdown() and detect == 0:
 		controller.SetCommand(0,1,0,0)
-		#control.linear.x=1
-		#control.linear.y=0
-		#pub1.publish(control)
 		sleep(1)
 		controller.SetCommand(-1,0,0,0)
-		#control.linear.x=0
-		#control.linear.y=-1
-		#pub1.publish(control)
 		sleep(9)
 		controller.SetCommand(0,1,0,0)
-		#control.linear.x=1
-		#control.linear.y=0
-		#pub1.publish(control)
 		sleep(1)
 		controller.SetCommand(1,0,0,0)
-		#control.linear.x=0
-		#control.linear.y=1
-		#pub1.publish(control)
 		sleep(9)	
 if __name__ == '__main__':
 	rospy.init_node('autonomous_search', anonymous=True)

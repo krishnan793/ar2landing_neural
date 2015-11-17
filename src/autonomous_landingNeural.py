@@ -44,18 +44,13 @@ def callback(data):
 		rospy.signal_shutdown("Landed")
 		
 	X=[1,x1,x2,x3,x4,x5]
-	#print X
-    #print w1
-    #print w2
+
 	Y=sigmoid(np.dot(X,w1))
-    #print Y
 	Z=sigmoid(np.dot(Y,w2))
 	Z=np.around(Z, decimals=2)
 	rospy.loginfo(rospy.get_caller_id() + " Input  %s %s %s %s %s", format(x1, '.2f'),format(x2, '.2f'),format(x3, '.2f'),format(x4, '.2f'),format(x5, '.2f'))
-	#print Z
 	control(Z)
-    #sonar0 = float(data.range)
-    #print "ads",data1
+
 def load_weights(file):
 	fp=np.load(file)
 	w1=fp['arr_0']
@@ -84,16 +79,13 @@ def listener():
     # name for our 'listener' node so that multiple listeners can
     # run simultaneously.
 	
-	
-
 	rospy.Subscriber("/visualization_marker", Marker, callback)
 	rospy.spin()
 
 if __name__ == '__main__':
 	# get an instance of RosPack with the default search paths
 	rospack = rospkg.RosPack()
-	#pub = rospy.Publisher('/cmd_vel', Twist, queue_size=10)
-	# get the file path for rospy_tutorials
+	
 	path = rospack.get_path('ar2landing_gazebo')
 	rospy.init_node('NNcontroller', anonymous=True)
 	MAX = 2
