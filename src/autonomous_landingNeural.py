@@ -86,7 +86,7 @@ if __name__ == '__main__':
 	# get an instance of RosPack with the default search paths
 	rospack = rospkg.RosPack()
 	
-	path = rospack.get_path('ar2landing_gazebo')
+	path = rospack.get_path('ar2landing_neural')
 	rospy.init_node('NNcontroller', anonymous=True)
 	MAX = 2
 	[w1,w2]=load_weights(path+"/data/weights.npz")

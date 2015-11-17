@@ -18,7 +18,7 @@ def sigmoid_h(num):
 rospack = rospkg.RosPack()
 
 # get the file path for rospy_tutorials
-path = rospack.get_path('ar2landing_gazebo')
+path = rospack.get_path('ar2landing_neural')
 
 data = np.loadtxt(path+"/data/data.txt")
 # X = 4x3 mxn

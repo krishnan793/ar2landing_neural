@@ -51,7 +51,7 @@ if __name__ == '__main__':
 	rospack = rospkg.RosPack()
 
 	# get the file path for rospy_tutorials
-	path = rospack.get_path('ar2landing_gazebo')
+	path = rospack.get_path('ar2landing_neural')
 	f = open(path+'/data/data.txt','a+')
 	listener()
 
