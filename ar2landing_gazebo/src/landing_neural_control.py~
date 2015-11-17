@@ -1,0 +1,94 @@
+#!/usr/bin/env python
+import rospkg
+import rospy
+import time
+import message_filters
+import numpy as np
+from std_msgs.msg import Empty
+from sensor_msgs.msg import Range
+from geometry_msgs.msg import Twist
+from visualization_msgs.msg import Marker
+
+def land():
+	nothing = Empty()
+	print "Quad copter Landed"
+	pub = rospy.Publisher('/ardrone/land', Empty, queue_size=10)
+	time.sleep(1)
+	pub.publish(nothing)
+	time.sleep(1)
+	return
+
+def sigmoid(num):
+	return 1.0/(1+np.exp(-1*num))
+
+def normalize(data,MAX):
+	return (data+1)/MAX
+	
+def callback(data):
+	x1 = normalize(data.pose.position.x,MAX)
+	x2 = normalize(data.pose.position.y,MAX)
+	x3 = normalize(data.pose.position.z,MAX)
+	x4 = normalize(data.pose.orientation.x,MAX)
+	x5 = normalize(data.pose.orientation.y,MAX)
+	
+	if(x3<=0.54):
+		land()
+		rospy.signal_shutdown("Landed")
+	
+	#rospy.loginfo(rospy.get_caller_id() + "I heard %s %s %s %s", sonar_0,sonar_1,sonar_2,sonar_3)
+	X=[1,x1,x2,x3,x4,x5]
+	print X
+    #print w1
+    #print w2
+	Y=sigmoid(np.dot(X,w1))
+    #print Y
+	Z=sigmoid(np.dot(Y,w2))
+	Z=np.around(Z, decimals=2)
+	print Z
+	control(Z)
+    #sonar0 = float(data.range)
+    #print "ads",data1
+def load_weights(file):
+	fp=np.load(file)
+	w1=fp['arr_0']
+	w2=fp['arr_1']
+	#print w1
+	#print w2
+	return [w1,w2]
+	
+def control(Z):
+	cntrl = Twist()
+	cntrl.linear.x=2*Z[0]-1
+	cntrl.linear.y=2*Z[1]-1
+	cntrl.linear.z=2*Z[2]-1
+	cntrl.angular.z=2*Z[3]-1
+	pub.publish(cntrl)
+	#time.sleep(0.05)
+	#print "Hai"
+def limit_reading(data,MAX):
+	if(data>MAX):
+		data=MAX
+	return data
+def listener():
+    # In ROS, nodes are uniquely named. If two nodes with the same
+    # node are launched, the previous one is kicked off. The
+    # anonymous=True flag means that rospy will choose a unique
+    # name for our 'listener' node so that multiple listeners can
+    # run simultaneously.
+	
+	rospy.init_node('NNcontroller', anonymous=True)
+	
+	rospy.Subscriber("/visualization_marker", Marker, callback)
+	rospy.spin()
+
+if __name__ == '__main__':
+	# get an instance of RosPack with the default search paths
+	rospack = rospkg.RosPack()
+	pub = rospy.Publisher('/cmd_vel', Twist, queue_size=10)
+	# get the file path for rospy_tutorials
+	path = rospack.get_path('ar2landing_gazebo')
+	
+	MAX = 2
+	[w1,w2]=load_weights(path+"/data/weights.npz")
+	listener()
+

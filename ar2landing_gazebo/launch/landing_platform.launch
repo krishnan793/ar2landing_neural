@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find ar2landing_gazebo)/worlds/ardrone_testworld.world"/>
+    <!-- more default parameters can be changed here -->
+  </include>
+
+  <!-- Spawn simulated quadrotor uav -->
+  <include file="$(find cvg_sim_gazebo)/launch/spawn_quadrotor.launch" >
+    <arg name="model" value="$(find cvg_sim_gazebo)/urdf/quadrotor_sensors.urdf.xacro"/>
+    <arg name="x" value="-5"/>  
+    <arg name="y" value="-2"/>
+    <arg name="z" value="0.2"/>
+    <arg name="R" default="0"/>
+    <arg name="P" default="0"/>
+    <arg name="Y" default="1.57"/>
+  </include>
+
+  <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
+  <include file="$(find ar2landing_gazebo)/launch/ar_track_alvar_detection.launch">
+  </include>
+  
+
+</launch>

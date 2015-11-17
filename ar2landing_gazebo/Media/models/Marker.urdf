@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<robot name="landingstation">
+	<link name="base_link">
+		<visual name="station">
+			<geometry>
+				<box size="1 1 0.2"/>
+			</geometry>
+			<material name="pattern">
+				<texture filename="package://ar2landing_gazebo/Media/models/marker/Marker1.png">
+			</material>
+		</visual>
+		<collision>
+			<geometry>
+				<box size="1 1 0.2"/>
+			</geometry>
+		</collision>
+	</link>
+</joint>
+</robot>
