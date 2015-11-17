@@ -31,14 +31,6 @@ def sleep(sec):
 		time.sleep(1)
 		sec -= 1
 
-def reset():
-	nothing = Empty()
-	print nothing
-	pub = rospy.Publisher('/ardrone/reset', Empty, queue_size=10)
-	time.sleep(1)
-	pub.publish(nothing)
-	return
-
 def reset_drone(pub1):
 	controller.SetCommand(0,0,0,0)
 	time.sleep(1)
@@ -70,5 +62,6 @@ if __name__ == '__main__':
 	search_pattern()
 	reset_drone(pub1)
 	rospy.spin()
+	
 
 
