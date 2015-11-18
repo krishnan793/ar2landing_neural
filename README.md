@@ -54,6 +54,17 @@ We are using the ar_track_alvar package for detecting the tags. Install the pack
 ```bash
 sudo apt-get install ros-indigo-ar-track-alvar
 ```
+## ardrone_control
+
+Clone this from my repository. Clone the brach ardrone_control.
+
+```bash
+cd ~/catkin_ws/src
+git clone -b ardrone_control --single-branch https://github.com/krishnan793/ardrone_control.git
+cd ~/catkin_ws/
+catkin_make
+```
+
 ## ar2landing_neural
 
 Clone this repository and make it.
