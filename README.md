@@ -25,4 +25,24 @@ cd ~/catkin_ws
 rosdep install --from-paths src -i
 catkin_make
 ```
-If you face any problems with ardrone_autonomy ref this site [http://ardrone-autonomy.readthedocs.org/en/latest/installation.html]. If you just getting started go through the link to get an overview. This package is only needed if you are implementing this on a real drone (Not in a simulator like Gazebo).
+If you face any problems with ardrone_autonomy ref this site [http://ardrone-autonomy.readthedocs.org/en/latest/installation.html]. If you are just getting started, go through the link to get an overview. This package is only needed if you are implementing this on a real drone (Not in a simulator like Gazebo).
+
+### tum_simulator
+
+The original package supports fuerte. There is a forked package by dougvk for Indigo. (It still has some issues). Clone and make that package.
+
+```bash
+cd ~/catkin_ws/src
+git clone https://github.com/dougvk/tum_simulator.git
+cd ~/catkin_ws/
+catkin_make
+```
+Try launching an empty world file to confirm everything works fine till now.
+
+```bash
+cd ~/catkin_ws/
+source devel/setup.bash
+roslaunch cvg_sim_gazebo ardrone_testworld.launch
+```
+
+If Gazebo is started with an AR drone in it, then everything works fine. Don't bother if you find any errors or warnings.
