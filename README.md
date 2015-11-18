@@ -49,4 +49,18 @@ If Gazebo is started with an AR drone in it, then everything works fine. (AR Dro
 
 ## ar_track_alvar
 
-We are using the ar_track_alvar package for detecting the tags.
+We are using the ar_track_alvar package for detecting the tags. Install the package.
+
+```bash
+sudo apt-get install ros-indigo-ar-track-alvar
+```
+## ar2landing_neural
+
+Clone this repository and make it.
+
+```bash
+cd ~/catkin_ws/src/
+git clone https://github.com/krishnan793/ar2landing_neural.git
+cd ~/catkin_ws/
+catkin_make
+```
