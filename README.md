@@ -29,7 +29,7 @@ If you face any problems with ardrone_autonomy ref this site [http://ardrone-aut
 
 ### tum_simulator
 
-The original package supports fuerte. There is a forked package by dougvk for Indigo. (It still has some issues). Clone and make that package.
+The original package supports fuerte. There is a forked package by dougvk [https://github.com/dougvk/tum_simulator] for Indigo. (It still has some issues). Clone and make that package.
 
 ```bash
 cd ~/catkin_ws/src
@@ -45,4 +45,8 @@ source devel/setup.bash
 roslaunch cvg_sim_gazebo ardrone_testworld.launch
 ```
 
-If Gazebo is started with an AR drone in it, then everything works fine. Don't bother if you find any errors or warnings.
+If Gazebo is started with an AR drone in it, then everything works fine. (AR Drone will be there in between the two houses. Rotate the world before trying to debug.) Don't bother if you find any errors or warnings.
+
+## ar_track_alvar
+
+We are using the ar_track_alvar package for detecting the tags.
