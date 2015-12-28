@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+  <include file="$(find ardrone_autonomy)/launch/ardrone.launch">
+  </include>
+
+  <include file="$(find ar2landing_gazebo)/launch/ar_track_alvar_detection.launch">
+  </include>
+  
+
+</launch>
