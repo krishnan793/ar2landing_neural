@@ -54,6 +54,17 @@ We are using the ar_track_alvar package for detecting the tags. Install the pack
 ```bash
 sudo apt-get install ros-indigo-ar-track-alvar
 ```
+## ardrone_control
+
+Clone this from my repository. Clone the brach ardrone_control.
+
+```bash
+cd ~/catkin_ws/src
+git clone -b ardrone_control --single-branch https://github.com/krishnan793/ardrone_control.git
+cd ~/catkin_ws/
+catkin_make
+```
+
 ## ar2landing_neural
 
 Clone this repository and make it.
@@ -64,3 +75,33 @@ git clone https://github.com/krishnan793/ar2landing_neural.git
 cd ~/catkin_ws/
 catkin_make
 ```
+If you followed everything correctly following launch file should work correctly
+
+```bash
+roslaunch ar2landing_gazebo landing_platform.launch
+```
+You should now see a gazebo simulation world with a spawned urdf model of AR Drone 2.0. Open another terminal and source it. Then run
+
+```bash
+cd ~/catkin_ws/
+source devel/setup.bash
+rosrun ar2landing_neural autonomous_landingNeural.py
+autonomous_search.py
+```
+
+Open another terminal, source it and run
+
+```bash
+cd ~/catkin_ws/
+source devel/setup.bash
+rosrun ar2landing_neural autonomous_search.py
+```
+
+You should now see AR Drone 2.0 takeoff and follows a lawn mower pattern. Open another terminal and run
+
+```bash
+rosrun rqt_image_view rqt_image_view
+```
+Select /ardrone/bottom/image_raw.
+
+You can now see AR Drone is adjusting to orient itself and trying to land on the platform while maintainin itself in the middle. Also it decreases the altitude on along with it. Once it reaches a safe distance it will land. The package contains pre trained weights and the network is using those weights now. The package contains a node called train_data_collector.py which can be used to capture training data and train.py which can be used to train the network.
