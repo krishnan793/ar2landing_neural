@@ -105,3 +105,14 @@ rosrun rqt_image_view rqt_image_view
 Select /ardrone/bottom/image_raw.
 
 You can now see AR Drone is adjusting to orient itself and trying to land on the platform while maintainin itself in the middle. Also it decreases the altitude on along with it. Once it reaches a safe distance it will land. The package contains pre trained weights and the network is using those weights now. The package contains a node called train_data_collector.py which can be used to capture training data and train.py which can be used to train the network.
+
+If you are going to implemenent this on a real drone you need to copy the camera baliberation file to ~/.ros/camera_info/. Somehow the default camera caliberation file is not taking. Do the following step to use the provided camera caliberation file.
+
+```
+cp ~/catkin_ws/ardrone_autonomy/data/camera_info/ardrone_bottom.yaml ~/.ros/camera_info/
+```
+Run
+```
+roslaunch ar2landing_gazebo landing_platform_drone.launch
+```
+instead of landing_platform.launch. Rest are same as the simulation.
