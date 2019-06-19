@@ -3,6 +3,8 @@ This is the repository that contains the complete work on Searching and Precisio
 
 [![video ar2landing_neural](https://i.ytimg.com/vi_webp/WrEmulklfXU/mqdefault.webp)](https://www.youtube.com/watch?v=WrEmulklfXU)
 
+For more info (https://www.eionix.co.in/2015/11/14/searching-and-precision-landing-of-ar.html)
+
 ## Install
 
 Following installation steps assume you hav a ROS Indigo installed in an Ubuntu 14.04 Linux Distro.
